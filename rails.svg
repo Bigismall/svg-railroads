@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     preserveAspectRatio="xMidYMid meet"
+     viewBox="0 0 640 640"
+     width="640"
+     height="640">
+    <defs>
+        <path d="M631.11 41.53C554.96 167.77 507.36 246.66 488.33 278.22C448.25 344.66 377.58 386.63 300.07 390.02C243.87 392.49 198.66 381.42 164.44 356.81C121.19 325.69 121.75 281.01 166.11 222.76C191.08 189.98 226.57 166.78 266.62 157.05C293.13 150.61 272.69 155.58 289.69 151.45C349.66 136.88 409.84 174.67 422.77 235.02C426.59 252.81 422.42 271.18 410.28 290.14C353.33 379.03 143.61 380.42 268.61 195.69C351.94 72.55 280.65 29.95 54.72 67.92"
+              id="rail"></path>
+    </defs>
+    <use xlink:href="#rail"
+         opacity="1"
+         fill-opacity="0"
+         stroke="#000000"
+         stroke-width="1"
+         stroke-opacity="1"></use>
+</svg>

@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    background: #075930;
+    padding-top: 50px;
+}
+
+.rail__container {
+    display: block;
+    width: 640px;
+    height: 640px;
+    margin: 0 auto 1rem auto;
+    position: relative;
+}
+.rail__canvas {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.rail_backing{
+    fill: none;
+    stroke: #dabdd8;
+    stroke-width: 16;
+    stroke-dasharray: 2, 3;
+}
+.rail_track{
+    fill: none;
+    stroke: #444;
+    stroke-width: 6;
+    stroke-dasharray: none;
+}
+.rail_train {
+    fill: #c00;
+    transform-origin: top left;
+    stroke: none;
+}
