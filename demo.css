@@ -38,3 +38,9 @@ body {
     transform-origin: top left;
     stroke: none;
 }
+
+
+#train-speed {
+    display: block;
+    width: 100%;
+}

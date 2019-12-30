@@ -10,6 +10,26 @@
           defer></script>
 </head>
 <body>
+<input type="range"
+       id="train-speed"
+       min="1"
+       max="10"
+       step="1"
+       value="1" />
+<div>
+  <h3>Rail 2 active</h3>
+  <input type="radio"
+         id="switchActive"
+         name="switch"
+         value="railRoad2"
+         checked />
+  <label for="switchActive">Rail Road 2</label>
+  <input type="radio"
+         id="switchInactive"
+         name="switch"
+         value="railRoad3" />
+  <label for="switchInactive">Rail Road 3</label>
+</div>
 <div class="rail__container">
   <svg version="1.1"
        xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +50,7 @@
                      result="xx"
                      operator="xor" />
       </filter>
-<!--      <path d="M631 41C554 167 507 246 488 278C448 344 377 386 300 390C243 392 198 381 164 356C121 325 121 281 166 222C191 189 226 166 266 157C293 150 272 155 289 151C349 136 409 174 422 235C426 252 422 271 410 290C353 379 143 380 268 195C351 72 280 29 54 67"            id="rail"></path>-->
+      <!--      <path d="M631 41C554 167 507 246 488 278C448 344 377 386 300 390C243 392 198 381 164 356C121 325 121 281 166 222C191 189 226 166 266 157C293 150 272 155 289 151C349 136 409 174 422 235C426 252 422 271 410 290C353 379 143 380 268 195C351 72 280 29 54 67"            id="rail"></path>-->
       <path d="M 20,320 Q 20,160 160 160 H 460 Q 620 160, 620 320"
             id="rail1"></path>
       <path d="M 620,320 Q 620,480 480 480 H 160 Q 20 480, 20 320"
@@ -59,8 +79,8 @@
 
     <use xlink:href="#train"
          class="rail_train js-train-1"></use>
-<!--    <use xlink:href="#train"-->
-<!--         class="rail_train js-train-2"></use>-->
+    <!--    <use xlink:href="#train"-->
+    <!--         class="rail_train js-train-2"></use>-->
   </svg>
 </div>
 </body>

@@ -18,7 +18,7 @@ class Rail {
     this._prev = [];
 
     if (this.isActive) {
-      this.$element.classList.add("rail_active");
+      this.$element.classList.add('rail_active');
     }
   }
 
@@ -30,14 +30,13 @@ class Rail {
     return this._prev.find((r) => r.isActive);
   }
 
-
   makeActive() {
     // this._prev = this._prev.map(r=>r.isActive=false);
     // this._next = this._next.map(r=>r.isActive=false);
     this._prev.forEach((p) => {
       p._next = p._next.map(r => {
         r.isActive = false;
-        r.$element.classList.remove("rail_active");
+        r.$element.classList.remove('rail_active');
         return r;
       });
     });
@@ -45,12 +44,12 @@ class Rail {
     this._next.forEach((n) => {
       n._prev = n._prev.map(r => {
         r.isActive = false;
-        r.$element.classList.remove("rail_active");
+        r.$element.classList.remove('rail_active');
         return r;
       });
     });
     this.isActive = true;
-    this.$element.classList.add("rail_active");
+    this.$element.classList.add('rail_active');
   }
 
   addNext(rail) {
@@ -81,7 +80,6 @@ class TrainOnRail {
       //this.train.direction = 1;
       //this.rail = this.rail.prev[0];
     }
-
     this.train.position += this.train.speed;
     this.train.x = this.rail.$element.getPointAtLength(this.train.position).x;
     this.train.y = this.rail.$element.getPointAtLength(this.train.position).y;
@@ -111,6 +109,8 @@ class TrainOnRail {
   const railRoad1 = new Rail('#rail1', true);
   const railRoad2 = new Rail('#rail2', true);
   const railRoad3 = new Rail('#rail3', false);
+  const $trainSpeed = document.querySelector('#train-speed');
+  const $switches = document.querySelectorAll('input[name=switch]');
 
   railRoad1.addNext(railRoad2);
   railRoad1.addNext(railRoad3);
@@ -126,22 +126,20 @@ class TrainOnRail {
   const trainOnRail1 = new TrainOnRail(new Train('.js-train-1', 0, 0, 4, 0),
       railRoad1);
 
-  console.log(railRoad1.isActive);
-  console.log(railRoad2.isActive);
-  console.log(railRoad3.isActive);
-  setTimeout(() => {
-    railRoad3.makeActive();
-    console.log(railRoad1.isActive);
-    console.log(railRoad2.isActive);
-    console.log(railRoad3.isActive);
-  }, 5000);
+  $trainSpeed.addEventListener('change', (e) => {
+    trainOnRail1.train.speed = parseInt(e.target.value);
+  });
 
-  setTimeout(() => {
-    railRoad2.makeActive();
-    console.log(railRoad1.isActive);
-    console.log(railRoad2.isActive);
-    console.log(railRoad3.isActive);
-  }, 15000);
+  Array.from($switches).map((r) =>
+      r.addEventListener('change', e => {
+
+        if ('railRoad2' === e.target.value) {
+          railRoad2.makeActive();
+        } else {
+          railRoad3.makeActive();
+        }
+      }),
+  );
 
   /*
    const trainOnRail2 = new TrainOnRail(
