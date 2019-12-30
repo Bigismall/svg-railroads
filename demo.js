@@ -11,10 +11,30 @@ class Train {
 }
 
 class Rail {
-  constructor(selector = '') {
+  constructor(selector = '', isActive = true) {
     this.$element = document.querySelector(selector);
     this.length = this.$element ? this.$element.getTotalLength() : 0;
+    this.next = [];
+    this.prev = [];
+    this._isActive = isActive;
   }
+
+  get isActive() {
+    return this._isActive;
+  }
+
+  set isActive(value) {
+    this._isActive = value;
+  }
+
+  addNext(rail) {
+    this.next.push(rail);
+  }
+
+  addPrev(rail) {
+    this.prev.push(rail);
+  }
+
 }
 
 class TrainOnRail {
@@ -26,9 +46,14 @@ class TrainOnRail {
 
   gameLoop() {
     if (this.train.position >= this.rail.length) {
-      this.train.direction = -1;
+      //this.train.direction = -1;
+      //TODO next prev depend on direction
+      this.rail = this.rail.next[0];
+      this.train.position = 0;
+
     } else if (this.train.position <= 0) {
-      this.train.direction = 1;
+      //this.train.direction = 1;
+      //this.rail = this.rail.prev[0];
     }
 
     this.train.position += this.train.speed * this.train.direction;
@@ -57,20 +82,23 @@ class TrainOnRail {
 }
 
 (function() {
-  const rail = new Rail('#rail');
-  const trainOnRail1 = new TrainOnRail(
-      new Train('.js-train-1', 0, 0, 1, 3, 24),
-      rail,
-  );
+  const rail1 = new Rail('#rail1', true);
+  const rail2 = new Rail('#rail2', true);
 
-  const trainOnRail2 = new TrainOnRail(
-      new Train('.js-train-2', 0, 0, 1, 3, 0),
-      rail,
-  );
+  rail1.addNext(rail2);
+  rail2.addNext(rail1);
+  const trainOnRail1 = new TrainOnRail(new Train('.js-train-1', 0, 0, 1, 3, 24),
+      rail1);
 
+  /*
+   const trainOnRail2 = new TrainOnRail(
+   new Train('.js-train-2', 0, 0, 1, 3, 0),
+   rail,
+   );
+   */
   function gameLoop() {
     trainOnRail1.gameLoop();
-    trainOnRail2.gameLoop();
+    // trainOnRail2.gameLoop();
 
     requestAnimationFrame(gameLoop);
   }
