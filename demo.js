@@ -31,8 +31,6 @@ class Rail {
   }
 
   makeActive() {
-    // this._prev = this._prev.map(r=>r.isActive=false);
-    // this._next = this._next.map(r=>r.isActive=false);
     this._prev.forEach((p) => {
       p._next = p._next.map(r => {
         r.isActive = false;
@@ -58,6 +56,20 @@ class Rail {
 
   addPrev(rail) {
     this._prev.push(rail);
+  }
+}
+
+class Switcher {
+
+  constructor(rail1, rail2) {
+    this.rails = [rail1, rail2];
+    this.activeRail = rail1.isActive ? 0 : 1;
+    this.rails[this.activeRail].makeActive();
+  }
+
+  change(railNumber) {
+    this.activeRail = railNumber ? railNumber % 2 : (this.activeRail + 1) % 2;
+    this.rails[this.activeRail].makeActive();
   }
 
 }
@@ -108,9 +120,10 @@ class TrainOnRail {
 (function() {
   const railRoad1 = new Rail('#rail1', true);
   const railRoad2 = new Rail('#rail2', true);
-  const railRoad3 = new Rail('#rail3', false);
+  const railRoad3 = new Rail('#rail3', true);
+
   const $trainSpeed = document.querySelector('#train-speed');
-  const $switches = document.querySelectorAll('input[name=switch]');
+  const $switcher23 = document.querySelector('#switcher23');
 
   railRoad1.addNext(railRoad2);
   railRoad1.addNext(railRoad3);
@@ -123,6 +136,7 @@ class TrainOnRail {
   railRoad3.addNext(railRoad1);
   railRoad3.addPrev(railRoad1);
 
+  const switcher = new Switcher(railRoad2, railRoad3);
   const trainOnRail1 = new TrainOnRail(new Train('.js-train-1', 0, 0, 4, 0),
       railRoad1);
 
@@ -130,16 +144,9 @@ class TrainOnRail {
     trainOnRail1.train.speed = parseInt(e.target.value);
   });
 
-  Array.from($switches).map((r) =>
-      r.addEventListener('change', e => {
-
-        if ('railRoad2' === e.target.value) {
-          railRoad2.makeActive();
-        } else {
-          railRoad3.makeActive();
-        }
-      }),
-  );
+  $switcher23.addEventListener('click', (e) => {
+    switcher.change();
+  });
 
   /*
    const trainOnRail2 = new TrainOnRail(
