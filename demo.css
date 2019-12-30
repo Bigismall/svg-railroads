@@ -29,6 +29,10 @@ body {
     stroke-width: 6;
     stroke-dasharray: none;
 }
+
+.rail_active {
+   stroke: orange;
+}
 .rail_train {
     fill: #c00;
     transform-origin: top left;

@@ -35,6 +35,8 @@
             id="rail1"></path>
       <path d="M 620,320 Q 620,480 480 480 H 160 Q 20 480, 20 320"
             id="rail2"></path>
+      <path d="M 620,320 Q 620,440 480 440 H 160 Q 20 440, 20 320"
+            id="rail3"></path>
       <polygon points="-10 -10,10 -10,10 10,-10 10"
                id="train" />
     </defs>
@@ -42,6 +44,8 @@
          class="rail_backing"></use>
     <use xlink:href="#rail2"
          class="rail_backing"></use>
+    <use xlink:href="#rail3"
+         class="rail_backing"></use>
 
     <use xlink:href="#rail1"
          class="rail_track"
@@ -49,11 +53,14 @@
     <use xlink:href="#rail2"
          class="rail_track"
          filter="url(#double)"></use>
+    <use xlink:href="#rail3"
+         class="rail_track"
+         filter="url(#double)"></use>
 
     <use xlink:href="#train"
          class="rail_train js-train-1"></use>
-    <use xlink:href="#train"
-         class="rail_train js-train-2"></use>
+<!--    <use xlink:href="#train"-->
+<!--         class="rail_train js-train-2"></use>-->
   </svg>
 </div>
 </body>
