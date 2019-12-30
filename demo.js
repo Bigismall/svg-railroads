@@ -10,7 +10,7 @@ class Train {
 }
 
 class Rail {
-  constructor(selector = '', isActive = true) {
+  constructor(selector = '', isActive = false) {
     this.$element = document.querySelector(selector);
     this.length = this.$element ? this.$element.getTotalLength() : 0;
     this.isActive = isActive;
@@ -19,6 +19,17 @@ class Rail {
 
     if (this.isActive) {
       this.$element.classList.add('rail_active');
+    }
+  }
+
+  getNextRail() {
+    switch (this._next.length) {
+      case 0:
+        throw Error('No rails avaible');
+      case 1:
+        return this._next[0];
+      case 2:
+        return this.nextActive;
     }
   }
 
@@ -46,6 +57,7 @@ class Rail {
         return r;
       });
     });
+
     this.isActive = true;
     this.$element.classList.add('rail_active');
   }
@@ -85,7 +97,7 @@ class TrainOnRail {
     if (this.train.position >= this.rail.length) {
       //this.train.direction = -1;
       //TODO next prev depend on direction
-      this.rail = this.rail.nextActive;
+      this.rail = this.rail.getNextRail();
       this.train.position = 0;
 
     } else if (this.train.position <= 0) {
@@ -118,25 +130,36 @@ class TrainOnRail {
 }
 
 (function() {
-  const railRoad1 = new Rail('#rail1', true);
-  const railRoad2 = new Rail('#rail2', true);
+  const railRoad1 = new Rail('#rail1', false);
+  const railRoad2 = new Rail('#rail2', false);
   const railRoad3 = new Rail('#rail3', true);
+  const railRoad4 = new Rail('#rail4', false);  //TODO set true
+  const railRoad5 = new Rail('#rail5', true);
 
   const $trainSpeed = document.querySelector('#train-speed');
   const $switcher23 = document.querySelector('#switcher23');
+  const $switcher45 = document.querySelector('#switcher45');
 
   railRoad1.addNext(railRoad2);
   railRoad1.addNext(railRoad3);
-  railRoad1.addPrev(railRoad2);
+  railRoad1.addPrev(railRoad4);
   railRoad1.addPrev(railRoad3);
 
-  railRoad2.addNext(railRoad1);
+  railRoad2.addNext(railRoad4);
+  railRoad2.addNext(railRoad5);
   railRoad2.addPrev(railRoad1);
 
   railRoad3.addNext(railRoad1);
   railRoad3.addPrev(railRoad1);
 
-  const switcher = new Switcher(railRoad2, railRoad3);
+  railRoad4.addNext(railRoad1);
+  railRoad4.addPrev(railRoad2);
+
+  railRoad5.addNext(railRoad1);
+  railRoad5.addPrev(railRoad2);
+
+  const switcher23 = new Switcher(railRoad2, railRoad3);
+  const switcher45 = new Switcher(railRoad4, railRoad5);
   const trainOnRail1 = new TrainOnRail(new Train('.js-train-1', 0, 0, 4, 0),
       railRoad1);
 
@@ -145,7 +168,10 @@ class TrainOnRail {
   });
 
   $switcher23.addEventListener('click', (e) => {
-    switcher.change();
+    switcher23.change();
+  });
+  $switcher45.addEventListener('click', (e) => {
+    switcher45.change();
   });
 
   /*
