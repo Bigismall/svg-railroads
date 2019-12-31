@@ -4,6 +4,7 @@ class Train {
     this.x = x;
     this.y = y;
     this.speed = speed;
+    this.direction = 1;   //1,-1
     this.position = position;
     this.angle = 0;
   }
@@ -55,16 +56,13 @@ class Switcher {
   constructor(rail1, rail2) {
     this.rails = [rail1, rail2];
     this.activeRail = rail1.active ? 0 : 1;
-    this.rails.forEach(r => {
-      r.active = false;
-      r.$element.classList.remove('rail_active');
-    });
-    this.rails[this.activeRail].active = true;
-    this.rails[this.activeRail].$element.classList.add('rail_active');
+    this.change(this.activeRail);
   }
 
   change(railNumber) {
-    this.activeRail = railNumber ? railNumber % 2 : (this.activeRail + 1) % 2;
+    this.activeRail = (undefined !== railNumber)
+        ? railNumber % 2
+        : (this.activeRail + 1) % 2;
     this.rails.forEach(r => {
       r.active = false;
       r.$element.classList.remove('rail_active');
@@ -84,16 +82,21 @@ class TrainOnRail {
 
   gameLoop() {
     if (this.train.position >= this.rail.length) {
-      //this.train.direction = -1;
-      //TODO next prev depend on direction
-      this.rail = this.rail.getNextRail();
-      this.train.position = 0;
+      this.train.direction = 1;
 
-    } else if (this.train.position <= 0) {
-      //this.train.direction = 1;
-      //this.rail = this.rail.prev[0];
+      this.rail = this.rail.getNextRail();
+      //TODO consider
+      //next rail has star/end points, depend on which point is closer, we should pick it and set train position to it
+      //depend on start/end  we should also set direction
+
+      this.train.position = 0;
     }
-    this.train.position += this.train.speed;
+    //else if (this.train.position <= 0) {
+    //this.train.direction = 1;
+    //this.rail = this.rail.prev[0];
+    //}
+
+    this.train.position += this.train.direction * this.train.speed;
     this.train.x = this.rail.$element.getPointAtLength(this.train.position).x;
     this.train.y = this.rail.$element.getPointAtLength(this.train.position).y;
     this.train.angle = 180 + this.DEG * Math.atan2(
@@ -114,6 +117,7 @@ class TrainOnRail {
     );
   }
 }
+
 
 const railRoad1 = new Rail('#rail1');
 const railRoad2 = new Rail('#rail2', true);
@@ -219,9 +223,8 @@ $switcher611.addEventListener('click', (e) => {
  );
  */
 function gameLoop() {
-   trainOnRail1.gameLoop();
+  trainOnRail1.gameLoop();
   // trainOnRail2.gameLoop();
-
   requestAnimationFrame(gameLoop);
 }
 
