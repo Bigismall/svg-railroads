@@ -16,13 +16,20 @@
        max="10"
        step="1"
        value="1" />
-
-<button type="button"
-        id="switcher23">Switch 2/3
-</button>
-<button type="button"
-        id="switcher45">Switch 4/5
-</button>
+<div class="switches">
+  <button type="button"
+          id="switcher35">Switch 3/5
+  </button>
+  <button type="button"
+          id="switcher78">Switch 7/8
+  </button>
+  <button type="button"
+          id="switcher47">Switch 4/7
+  </button>
+  <button type="button"
+          id="switcher29">Switch 2/9
+  </button>
+</div>
 <div class="rail__container">
   <svg version="1.1"
        xmlns="http://www.w3.org/2000/svg"
@@ -47,34 +54,43 @@
       <path d="M100,400v-100q0,-100,100,-100h100"
             id="rail1"></path>
 
-      <path d="M300,200h100q100,0,100,100v100"
+      <path d="M300,200h100"
             id="rail2"></path>
 
-      <path d="M500,400q0,100,-100,100h-100"
+      <path d="M400,200q100,0,100,100v100"
             id="rail3"></path>
 
-      <path d="M300,500h-100q-100,0,-100,-100"
+      <path d="M500,400 q 0 100, -100 100"
             id="rail4"></path>
 
-      <path d="M500,400v100q0,100,-100,100"
+      <path d="M400,500 h -200"
             id="rail5"></path>
 
-      <path d="M400 600 h -100"
+      <path d="M200,500 q -100 0, -100 -100"
             id="rail6"></path>
 
-      <path d="M300 600 h -100 q -100 0,-100 -100 v -100"
+      <path d="M500,400v100q0,100,-100,100"
             id="rail7"></path>
 
-      <path d="M400 600 q -100 0, -100 100 q 0 100, 100 100 h 100 q 100 0, 100,-100 v -300"
+      <path d="M400 600 h -100"
             id="rail8"></path>
 
-      <path d="M600 400 v -200 q 0 -100, -100 -100 c -100 0, -100 100, -200 100"
+      <path d="M300 600 h -100"
             id="rail9"></path>
+
+      <path d="M200 600 q -100 0,-100 -100 v -100"
+            id="rail10"></path>
+
+      <path d="M300 600 q -100 0, -100 100 "
+            id="rail11"></path>
+
+      <path d="M200 700 q 0 100, 100 100 h 200 q 100 0, 100,-100  v -300 v -200 q 0 -100, -100 -100 "
+            id="rail12"></path>
+      <path d="M500 100 c -100 0, -100 100, -200 100"
+            id="rail13"></path>
 
       <polygon points="-10 -10,10 -10,10 10,-10 10"
                id="train" />
-
-
 
     </defs>
     <use xlink:href="#rail1"
@@ -95,7 +111,14 @@
          class="rail_backing"></use>
     <use xlink:href="#rail9"
          class="rail_backing"></use>
-
+    <use xlink:href="#rail10"
+         class="rail_backing"></use>
+    <use xlink:href="#rail11"
+         class="rail_backing"></use>
+    <use xlink:href="#rail12"
+         class="rail_backing"></use>
+    <use xlink:href="#rail13"
+         class="rail_backing"></use>
 
     <use xlink:href="#rail1"
          class="rail_track"
@@ -124,7 +147,18 @@
     <use xlink:href="#rail9"
          class="rail_track"
          filter="url(#double)"></use>
-
+    <use xlink:href="#rail10"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail11"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail12"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail13"
+         class="rail_track"
+         filter="url(#double)"></use>
 
     <use xlink:href="#train"
          class="rail_train js-train-1"></use>

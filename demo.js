@@ -13,11 +13,11 @@ class Rail {
   constructor(selector = '', isActive = false) {
     this.$element = document.querySelector(selector);
     this.length = this.$element ? this.$element.getTotalLength() : 0;
-    this.isActive = isActive;
+    this.active = isActive;
     this._next = [];
     this._prev = [];
 
-    if (this.isActive) {
+    if (this.active) {
       this.$element.classList.add('rail_active');
     }
   }
@@ -34,17 +34,17 @@ class Rail {
   }
 
   get nextActive() {
-    return this._next.find((r) => r.isActive);
+    return this._next.find((r) => r.active);
   }
 
   get prevActive() {
-    return this._prev.find((r) => r.isActive);
+    return this._prev.find((r) => r.active);
   }
 
   makeActive() {
     this._prev.forEach((p) => {
       p._next = p._next.map(r => {
-        r.isActive = false;
+        r.active = false;
         r.$element.classList.remove('rail_active');
         return r;
       });
@@ -52,13 +52,13 @@ class Rail {
 
     this._next.forEach((n) => {
       n._prev = n._prev.map(r => {
-        r.isActive = false;
+        r.active = false;
         r.$element.classList.remove('rail_active');
         return r;
       });
     });
 
-    this.isActive = true;
+    this.active = true;
     this.$element.classList.add('rail_active');
   }
 
@@ -107,15 +107,12 @@ class TrainOnRail {
     this.train.position += this.train.speed;
     this.train.x = this.rail.$element.getPointAtLength(this.train.position).x;
     this.train.y = this.rail.$element.getPointAtLength(this.train.position).y;
-    this.train.angle =
-        180 +
-        this.DEG *
-        Math.atan2(
-            this.rail.$element.getPointAtLength(this.train.position).y -
-            this.rail.$element.getPointAtLength(this.train.position - 1).y,
-            this.rail.$element.getPointAtLength(this.train.position).x -
-            this.rail.$element.getPointAtLength(this.train.position - 1).x,
-        );
+    this.train.angle = 180 + this.DEG * Math.atan2(
+        this.rail.$element.getPointAtLength(this.train.position).y -
+        this.rail.$element.getPointAtLength(this.train.position - 1).y,
+        this.rail.$element.getPointAtLength(this.train.position).x -
+        this.rail.$element.getPointAtLength(this.train.position - 1).x,
+    );
 
     this.train.$element.setAttribute(
         'transform',
@@ -130,37 +127,57 @@ class TrainOnRail {
 }
 
 (function() {
-  /*
-  const railRoad1 = new Rail('#rail1', false);
-  const railRoad2 = new Rail('#rail2', false);
+/*
+  const railRoad1 = new Rail('#rail1');
+  const railRoad2 = new Rail('#rail2', true);
   const railRoad3 = new Rail('#rail3', true);
-  const railRoad4 = new Rail('#rail4', false);  //TODO set true
-  const railRoad5 = new Rail('#rail5', true);
+  const railRoad4 = new Rail('#rail4', true);
+  const railRoad5 = new Rail('#rail5');
+  //const railRoad6 = new Rail('#rail6');
+  const railRoad7 = new Rail('#rail7');
+  const railRoad8 = new Rail('#rail8', true);
+  const railRoad9 = new Rail('#rail9');
 
   const $trainSpeed = document.querySelector('#train-speed');
-  const $switcher23 = document.querySelector('#switcher23');
-  const $switcher45 = document.querySelector('#switcher45');
+
+  const $switcher35 = document.querySelector('#switcher35');
+  const $switcher78 = document.querySelector('#switcher78');
+  const $switcher47 = document.querySelector('#switcher47');
+  const $switcher29 = document.querySelector('#switcher29');
 
   railRoad1.addNext(railRoad2);
-  railRoad1.addNext(railRoad3);
+  railRoad1.addNext(railRoad9);
   railRoad1.addPrev(railRoad4);
-  railRoad1.addPrev(railRoad3);
+  railRoad1.addPrev(railRoad7);
 
-  railRoad2.addNext(railRoad4);
+  railRoad2.addNext(railRoad3);
   railRoad2.addNext(railRoad5);
   railRoad2.addPrev(railRoad1);
 
-  railRoad3.addNext(railRoad1);
-  railRoad3.addPrev(railRoad1);
+  railRoad3.addNext(railRoad4);
+  railRoad3.addPrev(railRoad2);
 
   railRoad4.addNext(railRoad1);
-  railRoad4.addPrev(railRoad2);
+  railRoad4.addPrev(railRoad3);
 
-  railRoad5.addNext(railRoad1);
+  railRoad5.addNext(railRoad7);
+  railRoad5.addNext(railRoad8);
   railRoad5.addPrev(railRoad2);
 
-  const switcher23 = new Switcher(railRoad2, railRoad3);
-  const switcher45 = new Switcher(railRoad4, railRoad5);
+  railRoad7.addNext(railRoad1);
+  railRoad7.addPrev(railRoad5);
+
+  railRoad8.addNext(railRoad9);
+  railRoad8.addPrev(railRoad5);
+
+  railRoad9.addNext(railRoad1);
+  railRoad9.addPrev(railRoad8);
+
+  const switcher35 = new Switcher(railRoad3, railRoad5);
+  const switcher78 = new Switcher(railRoad7, railRoad8);
+  const switcher47 = new Switcher(railRoad4, railRoad7);
+  //const switcher29 = new Switcher(railRoad2, railRoad9);
+
   const trainOnRail1 = new TrainOnRail(new Train('.js-train-1', 0, 0, 4, 0),
       railRoad1);
 
@@ -168,11 +185,16 @@ class TrainOnRail {
     trainOnRail1.train.speed = parseInt(e.target.value);
   });
 
-  $switcher23.addEventListener('click', (e) => {
-    switcher23.change();
+ */
+/*
+  $switcher35.addEventListener('click', (e) => {
+    switcher35.change();
   });
-  $switcher45.addEventListener('click', (e) => {
-    switcher45.change();
+  $switcher78.addEventListener('click', (e) => {
+    switcher78.change();
+  });
+  $switcher47.addEventListener('click', (e) => {
+    switcher47.change();
   });
 */
   /*
@@ -182,7 +204,7 @@ class TrainOnRail {
    );
    */
   function gameLoop() {
-    trainOnRail1.gameLoop();
+   // trainOnRail1.gameLoop();
     // trainOnRail2.gameLoop();
 
     requestAnimationFrame(gameLoop);
