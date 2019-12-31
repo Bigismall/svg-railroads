@@ -61,8 +61,8 @@ class Rail {
         nextRail.start.y);
     const distanceEnd = this._distance(train.x, train.y, nextRail.end.x,
         nextRail.end.y);
-  //compare train x/y with nextRail start/end
-  // if Start is closer then return 1, else return -1
+    //compare train x/y with nextRail start/end
+    // if Start is closer then return 1, else return -1
     return distanceStart < distanceEnd ? 1 : -1;
   }
 
@@ -106,11 +106,11 @@ class TrainOnRail {
 
   gameLoop() {
     //TODO there won't be such condition anymore
-    if (this.train.direction>0) {
+    if (this.train.direction > 0) {
       if (this.train.position >= this.rail.length) {
         const nextRail = this.rail.getNextRail();
-        this.direction = this.rail.getNextDirection(this.train, nextRail);
-        this.train.position = (this.direction > 0) ? 0 : this.rail.length;
+        this.train.direction = this.rail.getNextDirection(this.train, nextRail);
+        this.train.position = (this.train.direction > 0) ? 0 : this.rail.length;
         this.rail = nextRail;
         //TODO consider
         //next rail has star/end points, depend on which point is closer, we should pick it and set train position to it
