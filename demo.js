@@ -13,14 +13,32 @@ class Train {
 class Rail {
   constructor(selector = '', isActive = false) {
     this.$element = document.querySelector(selector);
-    this.length = this.$element ? this.$element.getTotalLength() : 0;
     this.active = isActive;
+
+    this.length = this.$element ? this.$element.getTotalLength() : 0;
+    this.start = {
+      x: this.$element.getPointAtLength(0).x,
+      y: this.$element.getPointAtLength(0).y,
+    };
+    this.end = {
+      x: this.$element.getPointAtLength(this.length).x,
+      y: this.$element.getPointAtLength(this.length).y,
+    };
+
     this._next = [];
     this._prev = [];
 
     if (this.active) {
       this.$element.classList.add('rail_active');
     }
+  }
+
+  get nextActive() {
+    return this._next.find((r) => r.active);
+  }
+
+  get prevActive() {
+    return this._prev.find((r) => r.active);
   }
 
   getNextRail() {
@@ -34,12 +52,18 @@ class Rail {
     }
   }
 
-  get nextActive() {
-    return this._next.find((r) => r.active);
+  _distance(x1, y1, x2, y2) {
+    return Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));
   }
 
-  get prevActive() {
-    return this._prev.find((r) => r.active);
+  getNextDirection(train, nextRail) {
+    const distanceStart = this._distance(train.x, train.y, nextRail.start.x,
+        nextRail.start.y);
+    const distanceEnd = this._distance(train.x, train.y, nextRail.end.x,
+        nextRail.end.y);
+  //compare train x/y with nextRail start/end
+  // if Start is closer then return 1, else return -1
+    return distanceStart < distanceEnd ? 1 : -1;
   }
 
   addNext(rail) {
@@ -81,20 +105,19 @@ class TrainOnRail {
   }
 
   gameLoop() {
-    if (this.train.position >= this.rail.length) {
-      this.train.direction = 1;
-
-      this.rail = this.rail.getNextRail();
-      //TODO consider
-      //next rail has star/end points, depend on which point is closer, we should pick it and set train position to it
-      //depend on start/end  we should also set direction
-
-      this.train.position = 0;
+    //TODO there won't be such condition anymore
+    if (this.train.direction>0) {
+      if (this.train.position >= this.rail.length) {
+        const nextRail = this.rail.getNextRail();
+        this.direction = this.rail.getNextDirection(this.train, nextRail);
+        this.train.position = (this.direction > 0) ? 0 : this.rail.length;
+        this.rail = nextRail;
+        //TODO consider
+        //next rail has star/end points, depend on which point is closer, we should pick it and set train position to it
+        //depend on start/end  we should also set direction
+      }
     }
-    //else if (this.train.position <= 0) {
-    //this.train.direction = 1;
-    //this.rail = this.rail.prev[0];
-    //}
+    //TODO  direction <0
 
     this.train.position += this.train.direction * this.train.speed;
     this.train.x = this.rail.$element.getPointAtLength(this.train.position).x;
@@ -117,7 +140,6 @@ class TrainOnRail {
     );
   }
 }
-
 
 const railRoad1 = new Rail('#rail1');
 const railRoad2 = new Rail('#rail2', true);
