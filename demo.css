@@ -7,7 +7,7 @@ body {
 .rail__container {
     display: block;
     width: 800px;
-    height: 800px;
+    height: 900px;
     margin: 0 auto 1rem auto;
     position: relative;
 }

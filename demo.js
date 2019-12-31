@@ -130,6 +130,7 @@ class TrainOnRail {
 }
 
 (function() {
+  /*
   const railRoad1 = new Rail('#rail1', false);
   const railRoad2 = new Rail('#rail2', false);
   const railRoad3 = new Rail('#rail3', true);
@@ -173,7 +174,7 @@ class TrainOnRail {
   $switcher45.addEventListener('click', (e) => {
     switcher45.change();
   });
-
+*/
   /*
    const trainOnRail2 = new TrainOnRail(
    new Train('.js-train-2', 0, 0, 1, 3, 0),

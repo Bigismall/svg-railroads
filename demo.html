@@ -28,9 +28,9 @@
        xmlns="http://www.w3.org/2000/svg"
        xmlns:xlink="http://www.w3.org/1999/xlink"
        preserveAspectRatio="xMidYMid meet"
-       viewBox="0 0 800 800"
+       viewBox="0 0 800 900"
        width="800"
-       height="800"
+       height="900"
        class="rail__canvas">
     <defs>
       <filter id="double">
@@ -44,22 +44,38 @@
                      operator="xor" />
       </filter>
       <!--      <path d="M631 41C554 167 507 246 488 278C448 344 377 386 300 390C243 392 198 381 164 356C121 325 121 281 166 222C191 189 226 166 266 157C293 150 272 155 289 151C349 136 409 174 422 235C426 252 422 271 410 290C353 379 143 380 268 195C351 72 280 29 54 67"            id="rail"></path>-->
-      <path d="M 20,320 Q 20,160 160 160 H 460 Q 620 160, 620 320"
+      <path d="M100,400v-100q0,-100,100,-100h100"
             id="rail1"></path>
-      <path d="M 620,320 Q 620,480 480 480 H 320"
+
+      <path d="M300,200h100q100,0,100,100v100"
             id="rail2"></path>
 
-      <path d="M 620,320 Q 620,440 480 440 H 160 Q 20 440, 20 320"
+      <path d="M500,400q0,100,-100,100h-100"
             id="rail3"></path>
 
-      <path d="M 320 480 H 160 Q 20 480, 20 320"
+      <path d="M300,500h-100q-100,0,-100,-100"
             id="rail4"></path>
 
-      <path d="M 320 480 C 160 480, 160 620 320 620 H 620"
+      <path d="M500,400v100q0,100,-100,100"
             id="rail5"></path>
+
+      <path d="M400 600 h -100"
+            id="rail6"></path>
+
+      <path d="M300 600 h -100 q -100 0,-100 -100 v -100"
+            id="rail7"></path>
+
+      <path d="M400 600 q -100 0, -100 100 q 0 100, 100 100 h 100 q 100 0, 100,-100 v -300"
+            id="rail8"></path>
+
+      <path d="M600 400 v -200 q 0 -100, -100 -100 c -100 0, -100 100, -200 100"
+            id="rail9"></path>
 
       <polygon points="-10 -10,10 -10,10 10,-10 10"
                id="train" />
+
+
+
     </defs>
     <use xlink:href="#rail1"
          class="rail_backing"></use>
@@ -71,6 +87,15 @@
          class="rail_backing"></use>
     <use xlink:href="#rail5"
          class="rail_backing"></use>
+    <use xlink:href="#rail6"
+         class="rail_backing"></use>
+    <use xlink:href="#rail7"
+         class="rail_backing"></use>
+    <use xlink:href="#rail8"
+         class="rail_backing"></use>
+    <use xlink:href="#rail9"
+         class="rail_backing"></use>
+
 
     <use xlink:href="#rail1"
          class="rail_track"
@@ -87,6 +112,19 @@
     <use xlink:href="#rail5"
          class="rail_track"
          filter="url(#double)"></use>
+    <use xlink:href="#rail6"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail7"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail8"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail9"
+         class="rail_track"
+         filter="url(#double)"></use>
+
 
     <use xlink:href="#train"
          class="rail_train js-train-1"></use>
