@@ -18,16 +18,16 @@
        value="1" />
 <div class="switches">
   <button type="button"
-          id="switcher35">Switch 3/5
-  </button>
-  <button type="button"
-          id="switcher78">Switch 7/8
+          id="switcher214">Switch 2/14
   </button>
   <button type="button"
           id="switcher47">Switch 4/7
   </button>
   <button type="button"
-          id="switcher29">Switch 2/9
+          id="switcher912">Switch 9/12
+  </button>
+  <button type="button"
+          id="switcher611">Switch 6/11
   </button>
 </div>
 <div class="rail__container">
@@ -51,7 +51,7 @@
                      operator="xor" />
       </filter>
       <!--      <path d="M631 41C554 167 507 246 488 278C448 344 377 386 300 390C243 392 198 381 164 356C121 325 121 281 166 222C191 189 226 166 266 157C293 150 272 155 289 151C349 136 409 174 422 235C426 252 422 271 410 290C353 379 143 380 268 195C351 72 280 29 54 67"            id="rail"></path>-->
-      <path d="M100,400v-100q0,-100,100,-100h100"
+      <path d="M100,300 q0,-100,100,-100h100"
             id="rail1"></path>
 
       <path d="M300,200h100"
@@ -78,16 +78,21 @@
       <path d="M300 600 h -100"
             id="rail9"></path>
 
-      <path d="M200 600 q -100 0,-100 -100 v -100"
+      <path d="M200 600 q -100 0,-100 -100"
             id="rail10"></path>
 
-      <path d="M300 600 q -100 0, -100 100 "
+      <path d="M100 500 v -100"
             id="rail11"></path>
 
-      <path d="M200 700 q 0 100, 100 100 h 200 q 100 0, 100,-100  v -300 v -200 q 0 -100, -100 -100 "
+      <path d="M300 600 q -100 0, -100 100 "
             id="rail12"></path>
-      <path d="M500 100 c -100 0, -100 100, -200 100"
+
+      <path d="M200 700 q 0 100, 100 100 h 200 q 100 0, 100,-100  v -300 v -200 q 0 -100, -100 -100 "
             id="rail13"></path>
+      <path d="M500 100 c -100 0, -100 100, -200 100"
+            id="rail14"></path>
+      <path d="M100 400 v -100"
+            id="rail15"></path>
 
       <polygon points="-10 -10,10 -10,10 10,-10 10"
                id="train" />
@@ -119,6 +124,10 @@
          class="rail_backing"></use>
     <use xlink:href="#rail13"
          class="rail_backing"></use>
+    <use xlink:href="#rail14"
+         class="rail_backing"></use>
+    <use xlink:href="#rail15"
+         class="rail_backing"></use>
 
     <use xlink:href="#rail1"
          class="rail_track"
@@ -157,6 +166,12 @@
          class="rail_track"
          filter="url(#double)"></use>
     <use xlink:href="#rail13"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail14"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail15"
          class="rail_track"
          filter="url(#double)"></use>
 

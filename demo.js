@@ -41,27 +41,6 @@ class Rail {
     return this._prev.find((r) => r.active);
   }
 
-  makeActive() {
-    this._prev.forEach((p) => {
-      p._next = p._next.map(r => {
-        r.active = false;
-        r.$element.classList.remove('rail_active');
-        return r;
-      });
-    });
-
-    this._next.forEach((n) => {
-      n._prev = n._prev.map(r => {
-        r.active = false;
-        r.$element.classList.remove('rail_active');
-        return r;
-      });
-    });
-
-    this.active = true;
-    this.$element.classList.add('rail_active');
-  }
-
   addNext(rail) {
     this._next.push(rail);
   }
@@ -75,15 +54,25 @@ class Switcher {
 
   constructor(rail1, rail2) {
     this.rails = [rail1, rail2];
-    this.activeRail = rail1.isActive ? 0 : 1;
-    this.rails[this.activeRail].makeActive();
+    this.activeRail = rail1.active ? 0 : 1;
+    this.rails.forEach(r => {
+      r.active = false;
+      r.$element.classList.remove('rail_active');
+    });
+    this.rails[this.activeRail].active = true;
+    this.rails[this.activeRail].$element.classList.add('rail_active');
   }
 
   change(railNumber) {
     this.activeRail = railNumber ? railNumber % 2 : (this.activeRail + 1) % 2;
-    this.rails[this.activeRail].makeActive();
-  }
+    this.rails.forEach(r => {
+      r.active = false;
+      r.$element.classList.remove('rail_active');
+    });
+    this.rails[this.activeRail].active = true;
+    this.rails[this.activeRail].$element.classList.add('rail_active');
 
+  }
 }
 
 class TrainOnRail {
@@ -126,89 +115,115 @@ class TrainOnRail {
   }
 }
 
-(function() {
+const railRoad1 = new Rail('#rail1');
+const railRoad2 = new Rail('#rail2', true);
+const railRoad3 = new Rail('#rail3');
+const railRoad4 = new Rail('#rail4', true);
+const railRoad5 = new Rail('#rail5');
+const railRoad6 = new Rail('#rail6', true);
+const railRoad7 = new Rail('#rail7');
+const railRoad8 = new Rail('#rail8');
+const railRoad9 = new Rail('#rail9');
+const railRoad10 = new Rail('#rail10');
+const railRoad11 = new Rail('#rail11');
+const railRoad12 = new Rail('#rail12', true);
+const railRoad13 = new Rail('#rail13');
+const railRoad14 = new Rail('#rail14');
+const railRoad15 = new Rail('#rail15');
+
+const $trainSpeed = document.querySelector('#train-speed');
+
+const $switcher214 = document.querySelector('#switcher214');
+const $switcher47 = document.querySelector('#switcher47');
+const $switcher912 = document.querySelector('#switcher912');
+const $switcher611 = document.querySelector('#switcher611');
+
+railRoad1.addPrev(railRoad15);
+railRoad1.addNext(railRoad2);
+railRoad1.addNext(railRoad14);
+
+railRoad2.addPrev(railRoad1);
+railRoad2.addNext(railRoad3);
+
+railRoad3.addPrev(railRoad2);
+railRoad3.addNext(railRoad4);
+railRoad3.addNext(railRoad7);
+
+railRoad4.addPrev(railRoad3);
+railRoad4.addNext(railRoad5);
+
+railRoad5.addPrev(railRoad4);
+railRoad5.addNext(railRoad6);
+
+railRoad6.addPrev(railRoad5);
+railRoad6.addNext(railRoad15);
+
+railRoad7.addPrev(railRoad3);
+railRoad7.addNext(railRoad8);
+
+railRoad8.addPrev(railRoad7);
+railRoad8.addNext(railRoad9);
+railRoad8.addNext(railRoad12);
+
+railRoad9.addPrev(railRoad8);
+railRoad9.addNext(railRoad10);
+
+railRoad10.addPrev(railRoad9);
+railRoad10.addNext(railRoad11);
+
+railRoad11.addPrev(railRoad10);
+railRoad11.addNext(railRoad15);
+
+railRoad12.addPrev(railRoad8);
+railRoad12.addNext(railRoad13);
+
+railRoad13.addPrev(railRoad12);
+railRoad13.addNext(railRoad14);
+
+railRoad14.addPrev(railRoad13);
+railRoad14.addNext(railRoad1);
+
+railRoad15.addPrev(railRoad11);
+railRoad15.addPrev(railRoad6);
+railRoad15.addNext(railRoad1);
+
+const switcher214 = new Switcher(railRoad2, railRoad14);
+const switcher47 = new Switcher(railRoad4, railRoad7);
+const switcher912 = new Switcher(railRoad9, railRoad12);
+const switcher611 = new Switcher(railRoad6, railRoad11);
+
+const trainOnRail1 = new TrainOnRail(new Train('.js-train-1', 0, 0, 4, 0),
+    railRoad1);
+
+$trainSpeed.addEventListener('change', (e) => {
+  trainOnRail1.train.speed = parseInt(e.target.value);
+});
+
+$switcher214.addEventListener('click', (e) => {
+  switcher214.change();
+});
+$switcher47.addEventListener('click', (e) => {
+  switcher47.change();
+});
+$switcher912.addEventListener('click', (e) => {
+  switcher912.change();
+});
+$switcher611.addEventListener('click', (e) => {
+  switcher611.change();
+});
+
 /*
-  const railRoad1 = new Rail('#rail1');
-  const railRoad2 = new Rail('#rail2', true);
-  const railRoad3 = new Rail('#rail3', true);
-  const railRoad4 = new Rail('#rail4', true);
-  const railRoad5 = new Rail('#rail5');
-  //const railRoad6 = new Rail('#rail6');
-  const railRoad7 = new Rail('#rail7');
-  const railRoad8 = new Rail('#rail8', true);
-  const railRoad9 = new Rail('#rail9');
-
-  const $trainSpeed = document.querySelector('#train-speed');
-
-  const $switcher35 = document.querySelector('#switcher35');
-  const $switcher78 = document.querySelector('#switcher78');
-  const $switcher47 = document.querySelector('#switcher47');
-  const $switcher29 = document.querySelector('#switcher29');
-
-  railRoad1.addNext(railRoad2);
-  railRoad1.addNext(railRoad9);
-  railRoad1.addPrev(railRoad4);
-  railRoad1.addPrev(railRoad7);
-
-  railRoad2.addNext(railRoad3);
-  railRoad2.addNext(railRoad5);
-  railRoad2.addPrev(railRoad1);
-
-  railRoad3.addNext(railRoad4);
-  railRoad3.addPrev(railRoad2);
-
-  railRoad4.addNext(railRoad1);
-  railRoad4.addPrev(railRoad3);
-
-  railRoad5.addNext(railRoad7);
-  railRoad5.addNext(railRoad8);
-  railRoad5.addPrev(railRoad2);
-
-  railRoad7.addNext(railRoad1);
-  railRoad7.addPrev(railRoad5);
-
-  railRoad8.addNext(railRoad9);
-  railRoad8.addPrev(railRoad5);
-
-  railRoad9.addNext(railRoad1);
-  railRoad9.addPrev(railRoad8);
-
-  const switcher35 = new Switcher(railRoad3, railRoad5);
-  const switcher78 = new Switcher(railRoad7, railRoad8);
-  const switcher47 = new Switcher(railRoad4, railRoad7);
-  //const switcher29 = new Switcher(railRoad2, railRoad9);
-
-  const trainOnRail1 = new TrainOnRail(new Train('.js-train-1', 0, 0, 4, 0),
-      railRoad1);
-
-  $trainSpeed.addEventListener('change', (e) => {
-    trainOnRail1.train.speed = parseInt(e.target.value);
-  });
-
+ const trainOnRail2 = new TrainOnRail(
+ new Train('.js-train-2', 0, 0, 1, 3, 0),
+ rail,
+ );
  */
-/*
-  $switcher35.addEventListener('click', (e) => {
-    switcher35.change();
-  });
-  $switcher78.addEventListener('click', (e) => {
-    switcher78.change();
-  });
-  $switcher47.addEventListener('click', (e) => {
-    switcher47.change();
-  });
-*/
-  /*
-   const trainOnRail2 = new TrainOnRail(
-   new Train('.js-train-2', 0, 0, 1, 3, 0),
-   rail,
-   );
-   */
-  function gameLoop() {
-   // trainOnRail1.gameLoop();
-    // trainOnRail2.gameLoop();
-
-    requestAnimationFrame(gameLoop);
-  }
+function gameLoop() {
+   trainOnRail1.gameLoop();
+  // trainOnRail2.gameLoop();
 
   requestAnimationFrame(gameLoop);
-})();
+}
+
+requestAnimationFrame(gameLoop);
+
