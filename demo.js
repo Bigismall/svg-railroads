@@ -123,7 +123,7 @@ class TrainOnRail {
       if (this.train.position >= this.rail.length) {
         const nextRail = this.rail.getNextRail(); //TODO or prev
         this.train.direction = this.rail.getNextDirection(this.train, nextRail);
-        this.train.position = (this.train.direction > 0) ? 0 : this.rail.length;
+        this.train.position = (this.train.direction > 0) ? 0 : nextRail.length;
         this.rail = nextRail;
         //TODO consider
         //next rail has star/end points, depend on which point is closer, we should pick it and set train position to it
@@ -133,7 +133,7 @@ class TrainOnRail {
       if (this.train.position<= 0) {
         const prevRail = this.rail.getPrevRail(); //TODO or prev
         this.train.direction = this.rail.getNextDirection(this.train, prevRail);
-        this.train.position = (this.train.direction > 0) ? 0 : this.rail.length;
+        this.train.position = (this.train.direction > 0) ? 0 : prevRail.length;
         this.rail = prevRail;
       }
     }
@@ -163,19 +163,14 @@ class TrainOnRail {
 
 const railRoad1 = new Rail('#rail1');
 const railRoad2 = new Rail('#rail2', true);
-const railRoad3 = new Rail('#rail3');
 const railRoad4 = new Rail('#rail4', true);
-const railRoad5 = new Rail('#rail5');
 const railRoad6 = new Rail('#rail6', true);
 const railRoad7 = new Rail('#rail7');
-const railRoad8 = new Rail('#rail8');
 const railRoad9 = new Rail('#rail9');
-const railRoad10 = new Rail('#rail10');
 const railRoad11 = new Rail('#rail11');
 const railRoad12 = new Rail('#rail12', true);
 const railRoad13 = new Rail('#rail13');
 const railRoad14 = new Rail('#rail14');
-const railRoad15 = new Rail('#rail15');
 
 const $trainSpeed = document.querySelector('#train-speed');
 
@@ -184,43 +179,32 @@ const $switcher47 = document.querySelector('#switcher47');
 const $switcher912 = document.querySelector('#switcher912');
 const $switcher611 = document.querySelector('#switcher611');
 
-railRoad1.addPrev(railRoad15);
+railRoad1.addPrev(railRoad6);
+railRoad1.addPrev(railRoad11);
 railRoad1.addNext(railRoad2);
 railRoad1.addNext(railRoad14);
 
 railRoad2.addPrev(railRoad1);
-railRoad2.addNext(railRoad3);
+railRoad2.addNext(railRoad4);
+railRoad2.addNext(railRoad7);
 
-railRoad3.addPrev(railRoad2);
-railRoad3.addNext(railRoad4);
-railRoad3.addNext(railRoad7);
+railRoad4.addPrev(railRoad2);
+railRoad4.addNext(railRoad6);
 
-railRoad4.addPrev(railRoad3);
-railRoad4.addNext(railRoad5);
+railRoad6.addPrev(railRoad4);
+railRoad6.addNext(railRoad1);
 
-railRoad5.addPrev(railRoad4);
-railRoad5.addNext(railRoad6);
+railRoad7.addPrev(railRoad2);
+railRoad7.addNext(railRoad9);
+railRoad7.addNext(railRoad12);
 
-railRoad6.addPrev(railRoad5);
-railRoad6.addNext(railRoad15);
+railRoad9.addPrev(railRoad7);
+railRoad9.addNext(railRoad11);
 
-railRoad7.addPrev(railRoad3);
-railRoad7.addNext(railRoad8);
+railRoad11.addPrev(railRoad9);
+railRoad11.addNext(railRoad11);
 
-railRoad8.addPrev(railRoad7);
-railRoad8.addNext(railRoad9);
-railRoad8.addNext(railRoad12);
-
-railRoad9.addPrev(railRoad8);
-railRoad9.addNext(railRoad10);
-
-railRoad10.addPrev(railRoad9);
-railRoad10.addNext(railRoad11);
-
-railRoad11.addPrev(railRoad10);
-railRoad11.addNext(railRoad15);
-
-railRoad12.addPrev(railRoad8);
+railRoad12.addPrev(railRoad7);
 railRoad12.addNext(railRoad13);
 
 railRoad13.addPrev(railRoad12);
@@ -229,9 +213,7 @@ railRoad13.addNext(railRoad14);
 railRoad14.addPrev(railRoad13);
 railRoad14.addNext(railRoad1);
 
-railRoad15.addPrev(railRoad11);
-railRoad15.addPrev(railRoad6);
-railRoad15.addNext(railRoad1);
+
 
 const switcher214 = new Switcher(railRoad2, railRoad14);
 const switcher47 = new Switcher(railRoad4, railRoad7);
