@@ -77,6 +77,16 @@ class Rail {
     return distanceStart < distanceEnd ? 1 : -1;
   }
 
+  static connect(rail1, rail2) {
+    rail1.addNext(rail2);
+    rail2.addPrev(rail1);
+  }
+
+  static hit(rail1, rail2) {
+    rail1.addNext(rail2);
+    rail2.addNext(rail1);
+  }
+
   addNext(rail) {
     this._next.push(rail);
   }
@@ -164,7 +174,7 @@ const railRoad4 = new Rail('#rail4');
 const railRoad6 = new Rail('#rail6');
 const railRoad7 = new Rail('#rail7', true);
 const railRoad9 = new Rail('#rail9', true);
-const railRoad11 = new Rail('#rail11',true);
+const railRoad11 = new Rail('#rail11', true);
 const railRoad12 = new Rail('#rail12');
 const railRoad13 = new Rail('#rail13');
 const railRoad14 = new Rail('#rail14');
@@ -176,39 +186,26 @@ const $switcher47 = document.querySelector('#switcher47');
 const $switcher912 = document.querySelector('#switcher912');
 const $switcher611 = document.querySelector('#switcher611');
 
-railRoad1.addPrev(railRoad6);
-railRoad1.addPrev(railRoad11);
-railRoad1.addNext(railRoad2);
-railRoad1.addNext(railRoad14);
+Rail.connect(railRoad1, railRoad2);
+Rail.hit(railRoad1, railRoad14);//opposite direction
 
-railRoad2.addPrev(railRoad1);
-railRoad2.addNext(railRoad4);
-railRoad2.addNext(railRoad7);
+Rail.connect(railRoad2, railRoad4);
+Rail.connect(railRoad2, railRoad7);
 
-railRoad4.addPrev(railRoad2);
-railRoad4.addNext(railRoad6);
+Rail.connect(railRoad4, railRoad6);
 
-railRoad6.addPrev(railRoad4);
-railRoad6.addNext(railRoad1);
+Rail.connect(railRoad6, railRoad1);
 
-railRoad7.addPrev(railRoad2);
-railRoad7.addNext(railRoad9);
-railRoad7.addNext(railRoad12);
+Rail.connect(railRoad7, railRoad9);
+Rail.connect(railRoad7, railRoad12);
 
-railRoad9.addPrev(railRoad7);
-railRoad9.addNext(railRoad11);
+Rail.connect(railRoad9, railRoad11);
 
-railRoad11.addPrev(railRoad9);
-railRoad11.addNext(railRoad1);
+Rail.connect(railRoad11, railRoad1);
 
-railRoad12.addPrev(railRoad7);
-railRoad12.addNext(railRoad13);
+Rail.connect(railRoad12, railRoad13);
 
-railRoad13.addPrev(railRoad12);
-railRoad13.addNext(railRoad14);
-
-railRoad14.addPrev(railRoad13);
-railRoad14.addNext(railRoad1);
+Rail.connect(railRoad13, railRoad14);
 
 const switcher214 = new Switcher(railRoad2, railRoad14);
 const switcher47 = new Switcher(railRoad4, railRoad7);
