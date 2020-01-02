@@ -41,7 +41,6 @@ class Rail {
     return this._prev.find((r) => r.active);
   }
 
-
   getPrevRail() {
     switch (this._prev.length) {
       case 0:
@@ -52,7 +51,6 @@ class Rail {
         return this.prevActive;
     }
   }
-
 
   getNextRail() {
     switch (this._next.length) {
@@ -129,15 +127,14 @@ class TrainOnRail {
         //next rail has star/end points, depend on which point is closer, we should pick it and set train position to it
         //depend on start/end  we should also set direction
       }
-    }else {
-      if (this.train.position<= 0) {
+    } else {
+      if (this.train.position <= 0) {
         const prevRail = this.rail.getPrevRail(); //TODO or prev
         this.train.direction = this.rail.getNextDirection(this.train, prevRail);
         this.train.position = (this.train.direction > 0) ? 0 : prevRail.length;
         this.rail = prevRail;
       }
     }
-
 
     this.train.position += this.train.direction * this.train.speed;
     this.train.x = this.rail.$element.getPointAtLength(this.train.position).x;
@@ -163,12 +160,12 @@ class TrainOnRail {
 
 const railRoad1 = new Rail('#rail1');
 const railRoad2 = new Rail('#rail2', true);
-const railRoad4 = new Rail('#rail4', true);
-const railRoad6 = new Rail('#rail6', true);
-const railRoad7 = new Rail('#rail7');
-const railRoad9 = new Rail('#rail9');
-const railRoad11 = new Rail('#rail11');
-const railRoad12 = new Rail('#rail12', true);
+const railRoad4 = new Rail('#rail4');
+const railRoad6 = new Rail('#rail6');
+const railRoad7 = new Rail('#rail7', true);
+const railRoad9 = new Rail('#rail9', true);
+const railRoad11 = new Rail('#rail11',true);
+const railRoad12 = new Rail('#rail12');
 const railRoad13 = new Rail('#rail13');
 const railRoad14 = new Rail('#rail14');
 
@@ -202,7 +199,7 @@ railRoad9.addPrev(railRoad7);
 railRoad9.addNext(railRoad11);
 
 railRoad11.addPrev(railRoad9);
-railRoad11.addNext(railRoad11);
+railRoad11.addNext(railRoad1);
 
 railRoad12.addPrev(railRoad7);
 railRoad12.addNext(railRoad13);
@@ -212,8 +209,6 @@ railRoad13.addNext(railRoad14);
 
 railRoad14.addPrev(railRoad13);
 railRoad14.addNext(railRoad1);
-
-
 
 const switcher214 = new Switcher(railRoad2, railRoad14);
 const switcher47 = new Switcher(railRoad4, railRoad7);
