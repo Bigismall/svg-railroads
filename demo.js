@@ -41,10 +41,23 @@ class Rail {
     return this._prev.find((r) => r.active);
   }
 
+
+  getPrevRail() {
+    switch (this._prev.length) {
+      case 0:
+        throw Error('No rails available');
+      case 1:
+        return this._prev[0];
+      case 2:
+        return this.prevActive;
+    }
+  }
+
+
   getNextRail() {
     switch (this._next.length) {
       case 0:
-        throw Error('No rails avaible');
+        throw Error('No rails available');
       case 1:
         return this._next[0];
       case 2:
@@ -108,7 +121,7 @@ class TrainOnRail {
     //TODO there won't be such condition anymore
     if (this.train.direction > 0) {
       if (this.train.position >= this.rail.length) {
-        const nextRail = this.rail.getNextRail();
+        const nextRail = this.rail.getNextRail(); //TODO or prev
         this.train.direction = this.rail.getNextDirection(this.train, nextRail);
         this.train.position = (this.train.direction > 0) ? 0 : this.rail.length;
         this.rail = nextRail;
@@ -116,8 +129,15 @@ class TrainOnRail {
         //next rail has star/end points, depend on which point is closer, we should pick it and set train position to it
         //depend on start/end  we should also set direction
       }
+    }else {
+      if (this.train.position<= 0) {
+        const prevRail = this.rail.getPrevRail(); //TODO or prev
+        this.train.direction = this.rail.getNextDirection(this.train, prevRail);
+        this.train.position = (this.train.direction > 0) ? 0 : this.rail.length;
+        this.rail = prevRail;
+      }
     }
-    //TODO  direction <0
+
 
     this.train.position += this.train.direction * this.train.speed;
     this.train.x = this.rail.$element.getPointAtLength(this.train.position).x;
