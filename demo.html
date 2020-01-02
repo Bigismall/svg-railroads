@@ -16,16 +16,28 @@
        max="10"
        step="1"
        value="1" />
-
-<button type="button" id="switcher23">Switch 2/3</button>
+<div class="switches">
+  <button type="button"
+          id="switcher214">Switch 2/14
+  </button>
+  <button type="button"
+          id="switcher47">Switch 4/7
+  </button>
+  <button type="button"
+          id="switcher912">Switch 9/12
+  </button>
+  <button type="button"
+          id="switcher611">Switch 6/11
+  </button>
+</div>
 <div class="rail__container">
   <svg version="1.1"
        xmlns="http://www.w3.org/2000/svg"
        xmlns:xlink="http://www.w3.org/1999/xlink"
        preserveAspectRatio="xMidYMid meet"
-       viewBox="0 0 640 640"
-       width="640"
-       height="640"
+       viewBox="0 0 800 900"
+       width="800"
+       height="900"
        class="rail__canvas">
     <defs>
       <filter id="double">
@@ -38,21 +50,58 @@
                      result="xx"
                      operator="xor" />
       </filter>
-      <!--      <path d="M631 41C554 167 507 246 488 278C448 344 377 386 300 390C243 392 198 381 164 356C121 325 121 281 166 222C191 189 226 166 266 157C293 150 272 155 289 151C349 136 409 174 422 235C426 252 422 271 410 290C353 379 143 380 268 195C351 72 280 29 54 67"            id="rail"></path>-->
-      <path d="M 20,320 Q 20,160 160 160 H 460 Q 620 160, 620 320"
+      <path d="M100,400 v -100 q0,-100,100,-100q50 0,100 0"
             id="rail1"></path>
-      <path d="M 620,320 Q 620,480 480 480 H 160 Q 20 480, 20 320"
+
+      <path d="M300,200h100 q100,0,100,100v100"
             id="rail2"></path>
-      <path d="M 620,320 Q 620,440 480 440 H 160 Q 20 440, 20 320"
-            id="rail3"></path>
+
+      <path d="M500,400 q 0 100, -100 100 h -200"
+            id="rail4"></path>
+
+      <path d="M200,500 q -100 0, -100 -100"
+            id="rail6"></path>
+
+      <path d="M500,400v100q0,100,-100,100 h -100"
+            id="rail7"></path>
+
+      <path d="M300 600 h -100 q -100 0,-100 -100"
+            id="rail9"></path>
+
+      <path d="M100 500 v-100"
+            id="rail11"></path>
+
+      <path d="M300 600 q -100 0, -100 100 "
+            id="rail12"></path>
+
+      <path d="M200 700 q 0 100, 100 100 h 200 q 100 0, 100,-100 v -300 v -200 q 0 -100, -100 -100 "
+            id="rail13"></path>
+      <path d="M500 100 c -100 0, -100 100, -200 100"
+            id="rail14"></path>
+
       <polygon points="-10 -10,10 -10,10 10,-10 10"
                id="train" />
+
     </defs>
     <use xlink:href="#rail1"
          class="rail_backing"></use>
     <use xlink:href="#rail2"
          class="rail_backing"></use>
-    <use xlink:href="#rail3"
+    <use xlink:href="#rail4"
+         class="rail_backing"></use>
+    <use xlink:href="#rail6"
+         class="rail_backing"></use>
+    <use xlink:href="#rail7"
+         class="rail_backing"></use>
+    <use xlink:href="#rail9"
+         class="rail_backing"></use>
+    <use xlink:href="#rail11"
+         class="rail_backing"></use>
+    <use xlink:href="#rail12"
+         class="rail_backing"></use>
+    <use xlink:href="#rail13"
+         class="rail_backing"></use>
+    <use xlink:href="#rail14"
          class="rail_backing"></use>
 
     <use xlink:href="#rail1"
@@ -61,7 +110,28 @@
     <use xlink:href="#rail2"
          class="rail_track"
          filter="url(#double)"></use>
-    <use xlink:href="#rail3"
+    <use xlink:href="#rail4"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail6"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail7"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail9"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail11"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail12"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail13"
+         class="rail_track"
+         filter="url(#double)"></use>
+    <use xlink:href="#rail14"
          class="rail_track"
          filter="url(#double)"></use>
 
